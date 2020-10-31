@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <title>covid19info</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom Font -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+
+  <!-- Custom styles for this template -->
+  <link href="static/css/general.css" rel="stylesheet">
+  <link href="static/css/submit.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="static/vendor/font-awesome/css/font-awesome.min.css">
+
+</head>
+<style>
+  .checkbox .cr {
+    position: relative;
+    display: inline-block;
+    border: 1px solid white;
+    border-radius: .25em;
+    width: 1.3em;
+    height: 1.3em;
+    float: left;
+    margin-right: .5em;
+  }
+
+  .checkbox label input[type="checkbox"]:checked+span {
+    background-color: white;
+    border: none;
+  }
+
+  .big_title {
+    margin-bottom: 0!important;
+    text-align: center;
+    margin-top:2rem;
+  }
+
+  #customFileLabel {
+    border-radius: 25px;
+    border: none;
+
+  }
+
+  #customFileLabel::after {
+    border-radius:  0 25px 25px 0;
+    content: "Procurar";
+  }
+</style>
+
+<body>
+  <!-- Nav Bar -->
+
+  <nav class="navbar navbar-expand-xl">
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="nav navbar-nav ml-auto" id="ul_navbar">
+        <li class="nav-item">
+          <a class="nav-link" id="homeButton"><i class="fa fa-home" style="font-size: 150%;"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="search_localização.html">À minha volta</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="search_nome.html">Procurar Estabelecimento</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-selected" href="submit.html">Submeter Estabelecimento</a>
+        </li>
+      </ul>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container" style="background-color: white;" id="Titulo">
+
+
+    <div class="row d-flex justify-content-center">
+      <div class="big_title" style="margin-bottom: 5%">
+        Dá visibilidade ao teu negócio
+        ou aos negócios à tua volta
+      </div>
+    </div>
+  </div>
+  <div class="container" style="background-color: white;visibility: hidden;" id="Obrigado">
+
+    <h1 style="text-align: center;">
+      Estabelecimento submetido com sucesso!
+    </h1>
+  </div>
+  <div class="container" style="background-color: white;visibility: visible;" id="errors">
+
+  </div>
+  <div class="container" id="Localizacao">
+    <div class="row">
+      <div class="col-12">
+        <h2 style="color: white; font-weight: bold;">Localização</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <div class="dropdown" id="dropdown1">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Distrito *
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" id="distrito" href="#">Aveiro</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Concelho *
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <a class="dropdown-item" href="#" id="Agueda">Agueda</a>
+            <a class="dropdown-item" href="#" id="Albergaria-a-Velha">Albergaria-a-Velha</a>
+            <a class="dropdown-item" href="#" id="Anadia">Anadia</a>
+            <a class="dropdown-item" href="#" id="Arouca">Arouca</a>
+            <a class="dropdown-item" href="#" id="Aveiro">Aveiro</a>
+            <a class="dropdown-item" href="#" id="CastelodePaiva">Castelo de Paiva</a>
+            <a class="dropdown-item" href="#" id="Espinho">Espinho</a>
+            <a class="dropdown-item" href="#" id="Estarreja">Estarreja</a>
+            <a class="dropdown-item" href="#" id="Ilhavo">Ilhavo</a>
+            <a class="dropdown-item" href="#" id="Mealhada">Mealhada</a>
+            <a class="dropdown-item" href="#" id="Murtosa">Murtosa</a>
+            <a class="dropdown-item" href="#" id="OliveiradeAzemeis">Oliveira de Azemeis</a>
+            <a class="dropdown-item" href="#" id="OliveiradoBairro">Oliveira do Bairro</a>
+            <a class="dropdown-item" href="#" id="Ovar">Ovar</a>
+            <a class="dropdown-item" href="#" id="SantaMariadaFeira">Santa Maria da Feira</a>
+            <a class="dropdown-item" href="#" id="SãoJoãodaMadeira">São João da Madeira</a>
+            <a class="dropdown-item" href="#" id="SeverdoVouga">Sever do Vouga</a>
+            <a class="dropdown-item" href="#" id="Vagos">Vagos</a>
+            <a class="dropdown-item" href="#" id="ValedeCambra">Vale de Cambra</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+
+        <h5>Morada *</h5>
+      </div>
+    </div>
+    <div class="row" id="moradaalert">
+      <div class="col-12">
+        <p class="mandatory-info">Introduza a morada (Obrigatório)</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Ex: Rua dos Cravos 8,Cacém"
+            aria-label="Recipient's username" aria-describedby="basic-addon2" id="morada">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+
+  </div>
+  <div class="container" id="Info">
+    <div class="row">
+      <div class="col-12">
+
+        <h2 style="color: white; font-weight: bold;">Informações gerais</h2>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <h5>Nome *</h5>
+      </div>
+    </div>
+    <div class="row" id="nomealert">
+      <div class="col-12">
+        <p class="mandatory-info">Introduza o Nome (Obrigatório)</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Ex: Supermercado Primavera"
+            aria-label="Recipient's username" aria-describedby="basic-addon2" id="nome">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <h5>Horário *</h5>
+      </div>
+    </div>
+    <div class="row" id="horarioalert">
+      <div class="col-12">
+        <p class="mandatory-info">Introduza o Horario (Obrigatório)</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Ex: 10-22 Todos os Dias"
+            aria-label="Recipient's username" aria-describedby="basic-addon2" id="horario">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <h5>Categorias abrangidas</h5>
+        <div class="container" style="margin-bottom: 0!important;padding-top: 0!important;">
+          <div class="row" style="margin-bottom: 20px;">
+            <div class="col-12">
+              <p>O meu estabelecimento é do tipo...</p>
+            </div>
+          </div>
+
+          <div id="saude" class="filter-group">
+            <h5>Saúde</h5>
+            <div class="form-check form-check-saude">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox"  value="farmacias" id="chk-farmacias">
+                  <span class="cr"><i class="cr-icon fa fa-check fa-inverse" style="color:#f4a261;"></i></span>
+                  Farmácias
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox"  value="hospitais" id="chk-hospitais">
+                  <span class="cr"><i class="cr-icon fa fa-check fa-inverse" style="color:#f4a261;"></i></span>
+                  Hospitais
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox"  value="c_saude" id="chk-c_saude">
+                  <span class="cr"><i class="cr-icon fa fa-check fa-inverse" style="color:#f4a261;"></i></span>
+                  Centros de Saúde
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox"  value="clinicas" id="chk-clinicas">
+                  <span class="cr"><i class="cr-icon fa fa-check fa-inverse" style="color:#f4a261;"></i></span>
+                  Clínicas
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox"  value="veterinarios" id="chk-veterinarios">
+                  <span class="cr"><i class="cr-icon fa fa-check fa-inverse" style="color:#f4a261;"></i></span>
+                  Veterinários
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+
+          <div id="alimentacao" class="filter-group">
+            <h5>Alimentação</h5>
+            <div class="form-check form-check-alimentacao">
+
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox"  value="mercados" id="chk-mercados">
+                  <span class="cr"><i class="cr-icon fa fa-check fa-inverse" style="color:#f4a261;"></i></span>
+                  Mercados
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox"  value="talhos" id="chk-talhos">
+                  <span class="cr"><i class="cr-icon fa fa-check fa-inverse" style="color:#f4a261;"></i></span>
+                  Talhos
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox"  value="padarias" id="chk-padarias">
+                  <span class="cr"><i class="cr-icon fa fa-check fa-inverse" style="color:#f4a261;"></i></span>
+                  Padarias
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox"  value="restaurantes" id="chk-restaurantes">
+                  <span class="cr"><i class="cr-icon fa fa-check fa-inverse" style="color:#f4a261;"></i></span>
+                  Restaurantes
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+
+          <div id="servicos" class="filter-group">
+            <h5>Serviços</h5>
+            <div class="form-check form-check-alimentacao">
+
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox"  value="lavandarias" id="chk-lavandarias">
+                  <span class="cr"><i class="cr-icon fa fa-check fa-inverse" style="color:#f4a261;"></i></span>
+                  Lavandarias
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox"  value="telecomunicacoes" id="chk-telecomunicacoes">
+                  <span class="cr"><i class="cr-icon fa fa-check fa-inverse" style="color:#f4a261;"></i></span>
+                  Telecomunicações
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox"  value="combustiveis" id="chk-combustiveis">
+                  <span class="cr"><i class="cr-icon fa fa-check fa-inverse" style="color:#f4a261;"></i></span>
+                  Combustíveis
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox"  value="gas" id="chk-gas">
+                  <span class="cr"><i class="cr-icon fa fa-check fa-inverse" style="color:#f4a261;"></i></span>
+                  Gás
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox"  value="oficinas" id="chk-oficinas">
+                  <span class="cr"><i class="cr-icon fa fa-check fa-inverse" style="color:#f4a261;"></i></span>
+                  Oficinas
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="servicos" class="filter-group">
+          <h5>Comodidades prestadas</h5>
+          <div class="form-check form-check-alimentacao">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox"  value="EntregasEmCasa" id="chk-EntregasEmCasa">
+                <span class="cr"><i class="cr-icon fa fa-check fa-inverse" style="color:#f4a261;"></i></span>
+                Entregas em Casa
+              </label>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox"  value="EncomendasPorTelefone"
+                  id="chk-EncomendasPorTelefone">
+                <span class="cr"><i class="cr-icon fa fa-check fa-inverse" style="color:#f4a261;"></i></span>
+                Encomendas por telefone
+              </label>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox"  value="TakeAway" id="chk-TakeAway">
+                <span class="cr"><i class="cr-icon fa fa-check fa-inverse" style="color:#f4a261;"></i></span>
+                Take-Away
+              </label>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox"  value="Outra" id="chk-Outra">
+                <span class="cr"><i class="cr-icon fa fa-check fa-inverse" style="color:#f4a261;"></i></span>
+                Outra
+              </label>
+            </div>
+            <input type="text" class="form-control" placeholder="Ex: Encomendas por Facebook"
+              aria-label="Recipient's username" aria-describedby="basic-addon2" id="Outras">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+
+            <h5>Imagem</h5>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="input-group mb-3">
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="customFile">
+                <label id="customFileLabel" class="custom-file-label" for="customFile">Escolher imagem</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div>
+
+  </div>
+  <div class="container" id="Contactos">
+    <div class="row">
+      <div class="col-12">
+
+        <h2 style="color: white; font-weight: bold;">Contactos</h2>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <p>Telefones</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="" aria-label="Recipient's username"
+            aria-describedby="basic-addon2" id="Telefone1" pattern="[0-9]{9}">
+        </div>
+      </div>
+      <div class="col-6">
+        <input type="text" class="form-control" placeholder="" aria-label="Recipient's username"
+          aria-describedby="basic-addon2" id="Telefone2">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <p>Email</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="...@...\./..." aria-label="Recipient's username"
+            aria-describedby="basic-addon2" id="Email">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-4">
+        <p>Facebook</p>
+      </div>
+      <div class="col-4">
+        <p>Instagram</p>
+      </div>
+      <div class="col-4">
+        <p>Twitter</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-4">
+        <input type="text" class="form-control" placeholder="facebook.com/..." aria-label="Recipient's username"
+          aria-describedby="basic-addon2" id="Facebook">
+      </div>
+      <div class="col-4">
+        <input type="text" class="form-control" placeholder="instagram.com/..." aria-label="Recipient's username"
+          aria-describedby="basic-addon2" id="Instagram">
+      </div>
+      <div class="col-4">
+        <input type="text" class="form-control" placeholder="twitter.com/..." aria-label="Recipient's username"
+          aria-describedby="basic-addon2" id="Twitter">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+
+        <p>Website</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <input type="text" class="form-control" placeholder="www\./...\./..." aria-label="Recipient's username"
+          aria-describedby="basic-addon2" id="Website">
+      </div>
+    </div>
+    <div class="row">
+
+    </div>
+  </div>
+  <div>
+
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h2 style="color: white; font-weight: bold;">Observações</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <p style="margin-top:0.5rem;margin-bottom:0.5rem">Indique eventuais condições especiais / excecionais do seu estabelecimento devido à situação de pandemia</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <textarea class="form-control" rows="5"
+            placeholder="Ex: Premanência máxima de 3 pessoas no estabelecimento sendo que cada uma das pessoas terá um lugar predefinido e marcado mno estabelecimento"
+            id="Obs" style="border-radius: 15px;"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div>
+
+  </div>
+  <div class="container" style="background-color: transparent;" id="button">
+    <div class="row">
+      <div class="col-4"></div>
+      <div class="col-4">
+        <button type="button" id="submit" class="home_button">Submeter negócio</button>
+      </div>
+      <div class="col-4"></div>
+    </div>
+  </div>
+
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="static/vendor/jquery/jquery.min.js"></script>
+  <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Our JavaScript -->
+  <script src="static/js/submit.js"></script>
+  <script src="static/js/search.js"></script>
+
+  <script>
+
+    $('#chk-Outra').change(function () {
+      if (this.checked) {
+        $('#Outras').show();
+      } else {
+        $('#Outras').hide();
+      }
+    });
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <script src="jquery-3.5.1.min.js"></script>
+
+  <title>covid19info</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom Font -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+
+  <!-- Custom styles for this template -->
+  <link href="static/css/general.css" rel="stylesheet">
+  <link href="static/css/search_location.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="static/vendor/font-awesome/css/font-awesome.min.css">
+
+
+</head>
+
+<body>
+  <!-- Nav Bar -->
+
+  <nav class="navbar navbar-expand-xl">
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="nav navbar-nav ml-auto" id="ul_navbar">
+        <li class="nav-item">
+          <a class="nav-link" id="homeButton"><i class="fa fa-home" style="font-size: 150%;"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-selected" href="search_localização.html">À minha volta</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="search_nome.html">Procurar Estabelecimento</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="submit.html">Submeter Estabelecimento</a>
+        </li>
+      </u>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container" style="flex-wrap: wrap; flex-direction: column;margin-top: 10%;">
+    <div class="row d-flex justify-content-center">
+      <div class="big_title" style="margin-bottom: 5%">
+        O que há à minha volta?
+      </div>
+    </div>
+
+    <div class="search-bar row justify-content-between">
+      <!-- Districts dropdown -->
+      <div class="dropdown col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 selectWrapper">
+        <button id="dropdownMenuButton" class="btn dropdown-toggle selectBox d-flex justify-content-between"
+          type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Distrito</button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" id="aveiro" href="#">Aveiro</a>
+          </div>
+      </div>
+
+      <!-- Counties dropdown -->
+      <div class="dropdown col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 selectWrapper">
+        <button id="dropdownMenuButton1" class="selectBox btn dropdown-toggle d-flex justify-content-between"
+          type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Concelho</button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <a class="dropdown-item" href="#" id="Agueda">Agueda</a>
+          <a class="dropdown-item" href="#" id="Albergaria-a-Velha">Albergaria-a-Velha</a>
+          <a class="dropdown-item" href="#" id="Anadia">Anadia</a>
+          <a class="dropdown-item" href="#" id="Arouca">Arouca</a>
+          <a class="dropdown-item" href="#" id="Aveiro">Aveiro</a>
+          <a class="dropdown-item" href="#" id="CastelodePaiva">Castelo de Paiva</a>
+          <a class="dropdown-item" href="#" id="Espinho">Espinho</a>
+          <a class="dropdown-item" href="#" id="Estarreja">Estarreja</a>
+          <a class="dropdown-item" href="#" id="Ilhavo">Ilhavo</a>
+          <a class="dropdown-item" href="#" id="Mealhada">Mealhada</a>
+          <a class="dropdown-item" href="#" id="Murtosa">Murtosa</a>
+          <a class="dropdown-item" href="#" id="OliveiradeAzemeis">Oliveira de Azemeis</a>
+          <a class="dropdown-item" href="#" id="OliveiradoBairro">Oliveira do Bairro</a>
+          <a class="dropdown-item" href="#" id="Ovar">Ovar</a>
+          <a class="dropdown-item" href="#" id="SantaMariadaFeira">Santa Maria da Feira</a>
+          <a class="dropdown-item" href="#" id="SãoJoãodaMadeira">São João da Madeira</a>
+          <a class="dropdown-item" href="#" id="SeverdoVouga">Sever do Vouga</a>
+          <a class="dropdown-item" href="#" id="Vagos">Vagos</a>
+          <a class="dropdown-item" href="#" id="ValedeCambra">Vale de Cambra</a>
+          </div>
+      </div>
+
+      <!-- Filters dropdown -->
+      <div class="dropdown col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 selectWrapper dropdown-filter">
+        <button class="selectBox btn dropdown-toggle d-flex justify-content-between" type="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Filtros
+        </button>
+        <ul id="filter_dropdown" class="dropdown-menu scrollable-menu" role="menu">
+        </ul>
+      </div>
+
+      <div class="button_box col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12">
+        <button id="search_button" class="btn search-button">
+          <i class="search_button fa fa-search fa-2x" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+    <div class="alert alert-danger" id="alertSL" role="alert" style="margin-top: 5%; display: none;">
+      Tem de escolher o distrito e a cidade.
+    </div>
+    <div class="row" style="margin-top: 100px;">
+      <div class="col-6" style="text-align: center;">
+        <img class="home_icon" src="static/img/location_icon.svg">
+      </div>
+      <div class="col-6">
+        <div class="row">
+          <div class="col-12">
+            <h4 class="home_section_title">
+              O que há à minha volta?
+            </h4>
+          </div>
+          <div class="col-12 home_section_description">
+            Descobre os estabelecimentos abertos na tua zona de residência e quem está a oferecer o quê.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="static/vendor/jquery/jquery.min.js"></script>
+  <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Our JavaScript -->
+  <script src="static/js/search.js"></script>
+
+</body>
+
+</html>
